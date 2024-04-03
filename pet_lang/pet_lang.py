@@ -234,7 +234,7 @@ class PetLang:
 
 
 if __name__ == "__main__":
-    AQI = AskQuestion({}, "")
+    AQI = PetLang({}, "")
     answer = AQI.ask_question("How old are you?", "uint")
     ADD_S = ""
     if answer > 1:
