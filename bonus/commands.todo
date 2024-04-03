@@ -1,0 +1,240 @@
+# Language Functions
+
+## Constants
+
+[ ] //
+[ ] TIME
+[ ] DATE
+[ ] TRUE
+[ ] FALSE
+[ ] ERROR
+[ ] SUCCESS
+
+## Character engin control (internal part of the API)
+
+[ ] restart(void)                                            : Function used to restart the API if a problem is present
+[ ] start(void)                                              : Function used to start the API (if it is stopped)
+[ ] stop(void)                                               : Function used to stop the API if it is started
+
+## Character Loading/Unloading
+
+[ ] int load(spritesheet_path: str, json_path: str)          : Load a new character based on a path
+[ ] int unload(void)                                         : Unload the currently loaded character
+
+## Character control API
+
+### Window events
+
+[ ] void update_window(void)                                 : Update the window, force process the window events
+
+### Check elements in the loaded character
+
+[ ] bool has_animation(animation_name: str)                  : Check if a specific animation is present.
+[ ] bool is_a_complex_animation(animation_name:str)          : Check if a specific animation has many parts.
+[ ] bool is_hidden(void)                                     : Check if the character is currently hidden.
+[ ] bool is_visible(void)                                    : Check if the character is visible.
+[ ] bool is_playing(void)                                    : Check if the there is an animation currently playing.
+[ ] bool is_paused(void)                                     : Check if the animation player is currently on pause.
+[ ] bool is_stopped(void)                                    : Check if the animation player is not playing and the queue is cleared.
+[ ] bool is_api_ready(void)                                  : Check if the api is running
+
+### Query (fetch, get, retreive) elements from the API
+
+[ ] list[str, str] get_animations(void)                      : Get all the avalable animations for the current character.
+[ ] str get_pet_name(void)                                   : Get the name of the pet that is loaded
+[ ] str get_current_animation(void)                          : Get the name of the animation currently playing
+[ ] str get_animation_name(void)                             : Get the name of the current animation name
+[ ] str get_section_name(void)                               : Get the name of the current section that is playing
+[ ] int get_animation_frame(void)                            : Get the frame index of the current animation
+[ ] tuple(int, int) get_pet_position(void)                   : Get the x and y position the pet is currently located at
+[ ] tuple(int, int) get_pet_size(void)                       : Get the current image size of the pet (width, height)
+[ ] int get_nb_animation_frames(animation_name: str)         : Get the number of frames contained in the current animation
+
+### Manage character animations
+
+These functions return a value of TRUE or FALSE depending on the result of the run
+
+[ ] int play_animation(animation_name: str)                  : Add an animation to the player queue and resume playing
+[ ] int clear_queue(void)                                    : Remove all queued animations from the player queue
+[ ] int set_animation(animation_name: str)                   : Clear the queue and play the provided animation
+[ ] int pause_animation(void)                                : Put the player on pause (or play if it was paused)
+[ ] int resume_animation(void)                               : Resume the playing of the queue (even if it was already playing)
+[ ] int step_animation(void)                                 : Put the animation on pause (if it was playing), play the next frame from the queue when called
+[ ] int play_animation_start(animation_name: str)            : For complex animations, send the first part of it into the queue (set player to play if it was paused)
+[ ] int play_animation_middle(animation_name: str)           : For complex animations, send the middle part of it into the queue (set player to play if it was paused)
+[ ] int play_animation_end(animation_name: str)              : For complex animations, send the last part of it into the queue (set player to play if it was paused)
+[ ] int set_animation_frame(animation_name: str, index: int) : Add an animation starting from a specified frame
+[ ] void stop_animation(void)                                : Stop the player wether it was playing or not
+
+### Character speach
+
+[ ] int speak(sentence: str)                                 : Make the character speak the string you input (this can be a paragraph)
+[ ] int stop_speach(void)                                    : Stop speaking (if it is currently speaking)
+
+### Manage character visibility
+
+[ ] void hide_pet(void)                                      : Hide the active character (it will be hidden wether it is visible or not)
+[ ] void show_pet(void)                                      : Show the active character (it will be shown wether it is visible or not)
+
+### Manage character position
+
+[ ] int move_pet(x: int, y: int)                             : Move the pet to a provided x and y position
+[ ] int set_pet_position(x: int, y:int)                      : Set the pet to a provided x and y position 
+[ ] int set_pet_size(width: int, height: int)                : Change the size of the pet based on the provided width and height (not yet implemented in the API)
+[ ] int set_pet_position_x(x: int)                           : Set the x position of the pet based on the provided x value
+[ ] int set_pet_position_y(y: int)                           : Set the y position of the pet based on the provided y value
+[ ] int set_offset_position(x: int, y: int)                  : Set the new x and y positions based on the previous x and y coordinates as well as the provided x and y values.
+[ ] int set_offset_position_x(x: int)                        : Set the new x position based on the previous x coordinate as well as the provided x value.
+[ ] int set_offset_position_y(y: int)                        : Set the new y position based on the previous y coordinate as well as the provided y value.
+
+## Miscellaneous functions
+
+[ ] void exit(error_code: int)                               : Stop the program based on the code provided by the value
+[ ] void print(value: any)                                   : Display the value you wish on the terminal (this is meant to be used as a debug function)
+[ ] str ask_question(question: str, type: str)               : Ask a question to the user and get it's response
+
+## Code basis
+
+### Conditions 
+
+[ ] if condition { rules }                                   : An if statement
+[ ] if condition { rules } else { rules }                    : An if else statement
+[ ] if cond. { rules } elif cond. { rules } else {rules}     : An if elif else statement
+
+### Condition comparisons (to be used with if, elif, for, while
+
+[ ] <var> == <data>                                          : Equal comparison
+[ ] <var> != <data>                                          : Not equal comparison
+[ ] <var> < <data>                                           : Less than comparison
+[ ] <var> <= <data>                                          : Less than or equal to comparison
+[ ] <var> > <data>                                           : Greater than comparison
+[ ] <var> >= <data>                                          : Greater than or equal to comparison
+
+### Variables
+
+[ ] <type> var = data                                        : A variable declaration
+
+### Loops
+
+[ ] while cond. { rules }                                    : A while declaration
+[ ] for cond. { rules }                                      : A for declaration
+
+### Functions
+
+[ ] <type> function_name(argument1: type1[, etc]) { rules }  : A function
+[ ] function_name(argument1[, etc])                          : A function call
+
+### Maths operators
+
+[ ] <var> = <var> + <data>                                   : A variable incrementation
+[ ] <var> += <data>                                          : A variable incrementation
+[ ] <var>++                                                  : A variable incrementation
+[ ] ++<var>                                                  : A variable incrementation
+[ ] <var> = <var> - <data>                                   : A variable decrementation
+[ ] <var> -= <data>                                          : A variable decrementation
+[ ] <var>--                                                  : A variable decrementation
+[ ] --<var>                                                  : A variable decrementation
+[ ] <var> = <var> / <data>                                   : A variable division
+[ ] <var> /= <data>                                          : A variable division
+[ ] <var> = <var> * <data>                                   : A variable multiplication
+[ ] <var> *= <data>                                          : A variable multiplication
+[ ] <var> = <var> % <data>                                   : A variable modulo
+[ ] <var> %= <data>                                          : A variable modulo
+[ ] <var> = <var> // <data>                                  : A variable euclidian division
+[ ] <var> //= <data>                                         : A variable euclidian division
+[ ] <var> = <var> ** <data>                                  : Exponentiation operation
+[ ] <var> **= <data>                                         : Exponentiation assignment
+[ ] float exp(<value: int or float>)                         : A function to calculate an exponential
+
+### Variable types
+
+[ ] any                                                      : This is not a type usable by a variable but it is used in linting to say that the output or input is not type sensitive
+[ ] int                                                      : Represents integer values, which are whole numbers without any decimal point. In programming, integers are commonly used for counting, indexing, and performing arithmetic operations.
+[ ] str                                                      : Represents string values, which are sequences of characters enclosed within single quotes, double quotes, or triple quotes. Strings are used to store textual data and are widely used for manipulating and formatting text.
+[ ] list                                                     : Represents an ordered collection of items, where each item can be of any data type. Lists are mutable, meaning they can be modified after creation by adding, removing, or modifying elements.
+[ ] dict                                                     : Represents a collection of key-value pairs, where each key is associated with a value. Dictionaries are unordered and mutable data structures, commonly used for storing and retrieving data based on keys.
+[ ] bool                                                     : Represents boolean values, which can be either `True` or `False`. Booleans are used for logical operations and control flow in programs, such as conditional statements and loop conditions.
+[ ] None                                                     : Represents a special singleton object in Python, often used to indicate the absence of a value or as a default return value for functions that do not explicitly return anything.
+[ ] NULL                                                     : Represents a null or uninitialized value, indicating the absence of a valid value or reference.
+[ ] void                                                     : Represents the absence of a return value, typically used to indicate that a function does not return any meaningful result.
+[ ] tuple                                                    : Represents an immutable ordered collection of items, similar to a list but immutable. Tuples are enclosed within parentheses and can contain elements of different data types. They are commonly used for grouping related data together.
+[ ] float                                                    : Represents floating-point numbers, which are real numbers with a decimal point. Floats are used for representing approximate values, such as measurements or calculations involving fractions.
+
+### Date and type formatting
+
+[ ] str get_date(void)                                      : Get the current date
+[ ] str get_time(void)                                      : Get the current time
+[ ] str format_date(date: str, format: str)                 : Format a date based on the format provided
+[ ] str format_time(time: str, format: str)                 : Format a time based on the format provided
+
+### Error handling
+
+[ ] try { rules } catch { rules }                            : A try catch statement
+[ ] raise error                                              : Raise an error
+
+### Comments
+
+[ ] //                                                       : A single line comment
+[ ] /* */                                                    : A multi-line comment
+
+### Logical operators
+
+[ ] and                                                      : Logical AND operator, returns True if both operands are True
+[ ] or                                                       : Logical OR operator, returns True if at least one operand is True
+[ ] not                                                      : Logical NOT operator, returns True if the operand is False
+[ ] in                                                       : Logical IN keyword to check if an item is in a list/dictionary/tuple/string
+
+### String management
+
+[ ]  '\a', '\b', '\t', '\n', '\v', '\f', '\r'                : Standard ascii characters are supported
+
+[ ] <var: str> = "some text"                                 : A method to create a string
+[ ] <var: list> = split(<var: str>, <character: str>)        : A function to split strings based on a provided character
+[ ] int len(<item: str>)                                     : A function that returns the length of a string
+[ ] <var: str> += <var: str>                                 : A method to add two string together
+[ ] <var: str> = <var: str> + <var2: str>                    : Another method to add two string together
+[ ] str <item: str>[<index: int>]                            : Get the character located at the provided index
+[ ] str <item: str>[<index1: int>:<index2: int>]             : Get the range provided by index1 and index2, this returns a new string
+
+### List/Tuple management
+
+[ ] append(<list>, <item: any>)                              : A function to add an element to a list
+[ ] any <list>[<index: int>]                                 : A method to access the content of a list
+[ ] list <list>[<index: int>:<index2: int>]                   : A method to access the content of a list from index1 to index2 (this returns a list [or tuple if that is the entry type])
+[ ] any pop(<list>, <index: int>)                            : A function to remove an element from a list
+[ ] int len(<list>)                                          : A function to get the length of a list
+[ ] void sort(<list>)                                        : A function to sort a list in ascending order (from smallest to biggest)
+[ ] void reverse(<list>)                                     : A function to reverse the order of the elements in a list (the last one becomes the first one)
+[ ] void reverse_sort(<list>)                                : A function to sort the list in decending order (from the biggest to the smallest)
+
+### dict management
+
+[ ] <dict>[<key: any>] = <value: any>                        : A method to add an element to a dictionary
+[ ] <dict>[<key: any>]                                       : A method to access the values of a dictionary
+[ ] any get_key(<dict>, <index: int>)                        : A method to get the key by it's index
+[ ] any pop(<dict>, <key: any>)                              : A function to remove an element from a dictionary
+[ ] int len(<dict>)                                          : A function to get the length of a dictionary
+[ ] tuple get_pair(<dict>, <index: int>)                     : A function to get a key-value node in the dictionnary based on it's index
+
+### Randomising
+
+[ ] int rand_int(<min: int>, <max: int>)                   : Get a random number between the first and second argument
+[ ] float rand_float(<min: float>, <max: float>)           : Get a random number (of type float) between the first and second argument
+[ ] any rand_list(<list>)                                  : Get a random item based on the list passed as the argument
+[ ] any rand_tuple(<tuple>)                                : Get a random item based on the tuple passed as an argument
+[ ] any rand_dict(<dict>)                                  : Get a random item (key) based on the dictionary input
+[ ] any rand_dict_key(<dict>)                              : Get a random item (value) based on the dictionary input
+
+### Fixing the unknown
+
+[ ] any type(<item>)                                       : Returns the type of the inputted item
+[ ] bool is_type(<item: any>, <type: any>)                 : Returns true if the provided type is the same as the item
+
+### Conversions
+
+[ ] int int(<item>)                                        : If the item can be converted to a number, it will be
+[ ] str str(<item>)                                        : If the item can be converted to a string, it will be
+[ ] bool bool(<item>)                                      : If the item can be converted to a boolean, it will be
+[ ] list list(<item>)                                      : If the item can be converted to a list, it will be
+[ ] float float(<item>)                                    : If the item can be converted to a float, it will be
+[ ] tuple tuple(<item>)                                    : If the item can be converted to a tuple, it will be
