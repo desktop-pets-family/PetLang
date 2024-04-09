@@ -2,13 +2,12 @@
 
 ## Constants
 
-[ ] //
-[ ] TIME
-[ ] DATE
-[ ] TRUE
-[ ] FALSE
-[ ] ERROR
-[ ] SUCCESS
+[ ] TIME                                                     : Get the current time
+[ ] DATE                                                     : Get the current date
+[ ] TRUE                                                     : Acts as a boolean true
+[ ] FALSE                                                    : Acts as a boolean false
+[ ] ERROR                                                    : The error code
+[ ] SUCCESS                                                  : The success code
 
 ## Character engin control (internal part of the API)
 
@@ -186,7 +185,7 @@ These functions return a value of TRUE or FALSE depending on the result of the r
 
 ### String management
 
-[ ]  '\a', '\b', '\t', '\n', '\v', '\f', '\r'                : Standard ascii characters are supported
+[ ]  '\a', '\b', '\t', '\n', '\v', '\f', '\r', '\\'          : Standard ascii characters are supported
 
 [ ] <var: str> = "some text"                                 : A method to create a string
 [ ] <var: list> = split(<var: str>, <character: str>)        : A function to split strings based on a provided character

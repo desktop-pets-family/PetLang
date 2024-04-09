@@ -1,0 +1,70 @@
+@startuml Checker
+
+namespace checker {
+
+    namespace program_functions {
+        class EnginFunctions {
+            // "Add all the functions concerning the API will be appended to this class"
+            +Constructor() // The function that will create all the api functions
+        }
+
+        class UserFunctions {
+            // "Store all the user created functions in the class"
+        }
+    }
+
+    enum available_types {
+        ANY,
+        INT,
+        STR,
+        LIST,
+        DICT,
+        BOOL,
+        NONE,
+        NULL,
+        VOID,
+        TUPLE,
+        FLOAT
+    }
+
+    class Constants {
+        - constant_choice: list[dict[str, lambda_function]]
+        
+        /**
+        ** get_constant
+        ** Return the value of a provided constant.
+        **/
+
+        +get_constant(constant_name: str) : any
+        /**
+        ** save_constant
+        ** Add the constant as a variable in the in the check_variables list
+        **/
+        +save_constant(constant_name: str, function_name:  str = "") : int // status
+    }
+
+    class CheckVariables {
+        +get_all_variables(function_name: str = "") : list[dict[str, any]]
+        +update_variables(function_name: str = "") : int //status
+        +add_variable(\n\tkey: str,\n\tdefinition: any,\n\ttype: available_types,\n\tfunction_name: str = ""\n): int // status
+        +update_variable(\n\tkey: str,\n\tdefinition: any,\n\ttype: available_types,\n\tfunction_name: str = ""\n) : void
+        +delete_variable(\n\tkey: str,\n\tfunction_name: str = "");
+        +extract_variables(code: list[str]) : void
+        - known_variables : list[dict[str, any]]
+    }
+
+    class CheckFunctions {
+        - created_functions: list[dict[str, any]]
+        +create_new_function(\n\tname: str,\n\tinput_variables: list[dict[str, any]],\n\tfunction_code: list[any],\n\treturn_type: any\n): int // status
+        +execute_existing_function(\n\tname: str,\n\tinput_variables: list[dict[str, any]]\n): any //the return of the function
+    }
+
+    Constants --> CheckVariables
+    available_types --> CheckVariables
+    CheckFunctions --> program_functions.EnginFunctions
+    CheckVariables --> program_functions.EnginFunctions
+    CheckFunctions --> program_functions.UserFunctions
+    CheckVariables --> program_functions.UserFunctions
+}
+
+@enduml Checker

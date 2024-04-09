@@ -1,0 +1,24 @@
+@startuml PetLang
+
+!include code_plan/checker.plantuml
+!include code_plan/compiler.plantuml
+!include code_plan/debugger.plantuml
+!include code_plan/runner.plantuml
+!include code_plan/syntax_colouriser.plantuml
+!include code_plan/compiler.plantuml
+!include code_plan/compiler.plantuml
+
+' namespace parser {
+    
+' }
+
+' namespace lexer {
+    
+' }
+
+checker --> compiler
+checker --> syntax_colouriser
+compiler --> runner
+compiler --> debugger
+
+@enduml PetLang

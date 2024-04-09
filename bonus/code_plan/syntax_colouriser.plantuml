@@ -1,0 +1,7 @@
+@startuml SyntaxColouriser
+
+namespace syntax_colouriser {
+    
+}
+
+@enduml SyntaxColouriser
